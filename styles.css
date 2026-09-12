@@ -1,0 +1,378 @@
+:root {
+	color-scheme: dark;
+	--bg: #050505;
+	--text: #b8bab7;
+	--muted: #626560;
+	--faint: #292b29;
+	--signal: #b32b2b;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--bg);
+}
+
+body {
+	min-width: 280px;
+	min-height: 100vh;
+	margin: 0;
+	color: var(--text);
+	background: var(--bg);
+	font-family: 'Fragment Mono', ui-monospace, SFMono-Regular, Consolas, monospace;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+body::after {
+	position: fixed;
+	z-index: 3;
+	inset: 0;
+	pointer-events: none;
+	content: '';
+	opacity: 0.045;
+	background-image: repeating-radial-gradient(circle at 17% 31%, transparent 0 1px, #fff 1px 1.4px, transparent 1.4px 4px);
+	background-size: 7px 9px;
+	animation: grain 12s steps(2, end) infinite;
+}
+
+.landscape {
+	position: fixed;
+	z-index: 0;
+	inset: 24% 0 0;
+	pointer-events: none;
+	background: url('./assets/landscape.webp') center bottom / cover no-repeat;
+	opacity: 0.64;
+	filter: contrast(1.08) brightness(0.9);
+	-webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 48%);
+	mask-image: linear-gradient(to bottom, transparent 0, #000 48%);
+}
+
+.rain {
+	position: fixed;
+	z-index: 1;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.rain::before,
+.rain::after {
+	position: absolute;
+	top: -30vh;
+	left: 3vw;
+	width: 1px;
+	height: 42px;
+	content: '';
+	background: linear-gradient(to bottom, transparent, rgb(190 195 193 / 25%));
+	box-shadow:
+		8vw 45vh rgb(190 195 193 / 18%),
+		17vw 12vh rgb(190 195 193 / 20%),
+		28vw 76vh rgb(190 195 193 / 16%),
+		39vw 28vh rgb(190 195 193 / 21%),
+		50vw 92vh rgb(190 195 193 / 17%),
+		61vw 7vh rgb(190 195 193 / 19%),
+		72vw 58vh rgb(190 195 193 / 22%),
+		83vw 19vh rgb(190 195 193 / 16%),
+		94vw 84vh rgb(190 195 193 / 20%);
+	animation: rain-fall 2.4s linear infinite;
+}
+
+.rain::after {
+	left: 9vw;
+	height: 27px;
+	opacity: 0.65;
+	box-shadow:
+		6vw 75vh rgb(190 195 193 / 17%),
+		14vw 23vh rgb(190 195 193 / 20%),
+		25vw 98vh rgb(190 195 193 / 18%),
+		36vw 44vh rgb(190 195 193 / 16%),
+		47vw 4vh rgb(190 195 193 / 19%),
+		58vw 68vh rgb(190 195 193 / 21%),
+		69vw 34vh rgb(190 195 193 / 17%),
+		80vw 89vh rgb(190 195 193 / 19%),
+		91vw 51vh rgb(190 195 193 / 16%);
+	animation-duration: 1.7s;
+	animation-delay: -0.8s;
+}
+
+.icon-sprite {
+	position: absolute;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.page {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	width: min(100% - 40px, 680px);
+	min-height: 100svh;
+	margin-inline: auto;
+	padding: 34px 0 28px;
+	flex-direction: column;
+}
+
+.topline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	color: var(--muted);
+	font-size: 10px;
+	letter-spacing: 0.12em;
+}
+
+.topline {
+	padding-bottom: 11px;
+	border-bottom: 1px solid var(--faint);
+}
+
+.clock {
+	flex: none;
+	color: var(--text);
+}
+
+.identity {
+	margin-top: 22px;
+}
+
+h1 {
+	margin: 0;
+	color: #b8bab7;
+	font-size: 12px;
+	font-weight: 400;
+	letter-spacing: 0.55em;
+	line-height: 1;
+	text-indent: 0.55em;
+}
+
+.lyric {
+	min-width: 0;
+	min-height: 1.5em;
+	margin: 0;
+	color: #858883;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.lyric::after {
+	content: '_';
+	color: var(--signal);
+	animation: cursor 1.1s steps(1, end) infinite;
+}
+
+.signal {
+	position: relative;
+	width: min(62vw, 270px);
+	margin: 0 auto 2px;
+	color: #666964;
+}
+
+.signal-label {
+	position: absolute;
+	z-index: 1;
+	top: 17.5%;
+	left: 50%;
+	padding: 0 11px;
+	background: var(--bg);
+	transform: translate(-50%, -50%);
+}
+
+.signal svg {
+	display: block;
+	width: 100%;
+	overflow: visible;
+}
+
+.sensor-ring,
+.sensor-grid,
+.heartbeat {
+	fill: none;
+	stroke: currentColor;
+	vector-effect: non-scaling-stroke;
+}
+
+.sensor-ring {
+	stroke-dasharray: 2 4;
+	stroke-width: 1;
+	opacity: 0.65;
+}
+
+.sensor-grid {
+	stroke-dasharray: 4 8;
+	stroke-width: 0.75;
+	opacity: 0.18;
+}
+
+.heartbeat {
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.heartbeat-base {
+	stroke-width: 1;
+	opacity: 0.32;
+}
+
+.heartbeat-pulse {
+	stroke: #c7c9c5;
+	stroke-dasharray: 0.16 0.84;
+	stroke-width: 1.4;
+	filter: drop-shadow(0 0 3px rgb(199 201 197 / 35%));
+	animation:
+		heartbeat-scan 2.6s linear infinite,
+		heartbeat-glow 1.3s ease-in-out infinite;
+}
+
+.heartbeat-dot {
+	fill: var(--signal);
+	filter: drop-shadow(0 0 5px rgb(179 43 43 / 55%));
+	transform-box: fill-box;
+	transform-origin: center;
+	animation: heartbeat-beat 1.3s ease-in-out infinite;
+}
+
+.links {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.links li + li {
+	border-top: 1px solid rgb(98 101 96 / 15%);
+}
+
+.links a {
+	display: grid;
+	min-height: 35px;
+	align-items: center;
+	grid-template-columns: 45px 16px minmax(92px, auto) 1fr;
+	gap: 11px;
+	color: var(--text);
+	text-decoration: none;
+	outline: 0;
+}
+
+.links .index {
+	color: var(--muted);
+	font-size: 10px;
+	transition: color 160ms ease;
+}
+
+.links svg {
+	width: 14px;
+	height: 14px;
+	fill: currentColor;
+	opacity: 0.66;
+	transition:
+		color 160ms ease,
+		opacity 160ms ease;
+}
+
+.links .label {
+	letter-spacing: 0.02em;
+	transition:
+		color 160ms ease,
+		transform 160ms ease;
+}
+
+.links .line {
+	height: 1px;
+	background: var(--faint);
+	transform-origin: left;
+	transition:
+		background-color 160ms ease,
+		transform 160ms ease;
+}
+
+.links a:is(:hover, :focus-visible) :is(.index, svg, .label) {
+	color: var(--brand);
+}
+
+.links a:is(:hover, :focus-visible) svg {
+	opacity: 1;
+}
+
+.links a:is(:hover, :focus-visible) .label {
+	transform: translateX(3px);
+}
+
+.links a:is(:hover, :focus-visible) .line {
+	background: var(--brand);
+	transform: scaleX(0.96);
+}
+
+.links a:focus-visible {
+	box-shadow: inset 2px 0 var(--brand);
+}
+
+@keyframes rain-fall {
+	from {
+		transform: translate3d(0, -30vh, 0) rotate(4deg);
+	}
+
+	to {
+		transform: translate3d(0, 160vh, 0) rotate(4deg);
+	}
+}
+
+@keyframes heartbeat-scan {
+	to {
+		stroke-dashoffset: -1;
+	}
+}
+
+@keyframes heartbeat-glow {
+	50% {
+		opacity: 0.45;
+	}
+}
+
+@keyframes heartbeat-beat {
+	45%,
+	55% {
+		opacity: 1;
+		transform: scale(1.7);
+	}
+}
+
+@keyframes cursor {
+	50% {
+		opacity: 0;
+	}
+}
+
+@keyframes grain {
+	50% {
+		transform: translate3d(1px, -1px, 0);
+	}
+}
+
+@media (max-width: 520px) {
+	.page {
+		width: min(100% - 28px, 680px);
+		padding-top: 22px;
+	}
+
+	.identity {
+		margin-top: 18px;
+	}
+
+	.signal {
+		width: min(66vw, 225px);
+	}
+
+	.links a {
+		grid-template-columns: 38px 15px minmax(82px, auto) 1fr;
+		gap: 8px;
+	}
+
+	.landscape {
+		top: 38%;
+		background-position: 62% bottom;
+	}
+}
