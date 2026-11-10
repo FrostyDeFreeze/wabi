@@ -5,15 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="theme-color" content="#050505" />
 		<title>FrostyDeFreeze</title>
-		<meta name="description" content="don't feel sorry for yourself. only assholes do that" />
+		<meta name="description" content="don't feel sorry for yourself. only assholes do that." />
 		<meta property="og:title" content="FrostyDeFreeze" />
-		<meta property="og:description" content="don't feel sorry for yourself. only assholes do that" />
+		<meta property="og:description" content="don't feel sorry for yourself. only assholes do that." />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://cuvi.dev" />
 		<meta property="og:image" content="https://i.cuvi.dev/avatar.png" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho&display=swap" rel="stylesheet" />
+		<link rel="preload" href="./assets/instrument-serif.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="./quotes.json" as="fetch" crossorigin />
 		<link rel="icon" href="./assets/favicon.svg" />
 		<link rel="stylesheet" href="./styles.css" />
 		<script type="module" src="./script.js"></script>
@@ -21,14 +20,8 @@
 	<body>
 		<canvas class="landscape" aria-hidden="true"></canvas>
 		<main class="page">
-			<header class="topline">
-				<p class="lyric">the face behind the silhouette</p>
-				<time class="clock">--:--</time>
-			</header>
-
 			<h1 class="name">cuvi</h1>
-			<canvas class="pulse" aria-hidden="true"></canvas>
-
+			<p class="quote"></p>
 			<nav aria-label="Links">
 				<ul class="links">
 					<li><a href="https://github.com/frostydefreeze" target="_blank" rel="noopener noreferrer">github</a></li>
@@ -48,9 +41,6 @@
 					</li>
 					<li>
 						<a href="https://www.last.fm/user/frostydefreeze" target="_blank" rel="noopener noreferrer">last.fm</a>
-					</li>
-					<li>
-						<a href="https://www.instagram.com/dankfreeze" target="_blank" rel="noopener noreferrer">instagram</a>
 					</li>
 					<li><a href="https://osu.ppy.sh/users/14454580" target="_blank" rel="noopener noreferrer">osu</a></li>
 					<li>
